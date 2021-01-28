@@ -4,6 +4,7 @@ import {
   DECREMENT_FOOD_COUNT,
   CLEAR_CART,
   RECEIVE_USER_INFO,
+  ADDLIST_SHOP
 } from './mutations-type'
 export default {
   // SET_DATA (state, data) {
@@ -112,5 +113,14 @@ export default {
   [RECEIVE_USER_INFO](state,{userInfo}) {
     state.userInfo = userInfo;
     state.isLogin = 1;
+  },
+
+
+  //更新商家地址
+  [ADDLIST_SHOP](state,{addlist}) {
+    console.log(addlist)
+    state.Addlist = addlist
+    console.log(state.Addlist)
   }
+
 }

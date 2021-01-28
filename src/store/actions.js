@@ -1,22 +1,23 @@
-import  {
+import {
   INCREMENT_FOOD_COUNT,
   DECREMENT_FOOD_COUNT,
   CLEAR_CART,
   RECEIVE_USER_INFO,
+  ADDLIST_SHOP
 } from './mutations-type'
 
 export default {
   // setData ({ commit }) {
-    // let phoneData = JSON.parse(localStorage.getItem('phoneData') || '[]');
-    // const totalPrice = Number(localStorage.getItem('totalPrice') || '0'),
-    //       totalMount = Number(localStorage.getItem('totalMount') || '0'),
-    //       cartData = JSON.parse(localStorage.getItem('cartData') || '[]');
+  // let phoneData = JSON.parse(localStorage.getItem('phoneData') || '[]');
+  // const totalPrice = Number(localStorage.getItem('totalPrice') || '0'),
+  //       totalMount = Number(localStorage.getItem('totalMount') || '0'),
+  //       cartData = JSON.parse(localStorage.getItem('cartData') || '[]');
 
-    // phoneData = phoneData.map((item) => {
-    //   const picsData = JSON.parse(item.pics);
-    //   item.img = picsData[0][0][0];
-    //   return item;
-    // });
+  // phoneData = phoneData.map((item) => {
+  //   const picsData = JSON.parse(item.pics);
+  //   item.img = picsData[0][0][0];
+  //   return item;
+  // });
 
   //   commit('SET_DATA', {
   //     totalPrice,
@@ -24,7 +25,7 @@ export default {
   //     cartData
   //   })
   // },
-  
+
   // setTotal ({ commit }, payload) {
   //   commit('SET_TOTAL', payload);
   // },
@@ -38,16 +39,16 @@ export default {
   // },
 
   //同步更新food中的count值
-  updateFoodCount({commit}, {isAdd, food}) {
+  updateFoodCount({ commit }, { isAdd, food }) {
     if (isAdd) {
-      commit(INCREMENT_FOOD_COUNT, {food})
+      commit(INCREMENT_FOOD_COUNT, { food })
     } else {
-      commit(DECREMENT_FOOD_COUNT, {food})
+      commit(DECREMENT_FOOD_COUNT, { food })
     }
   },
 
   // 同步清空购物车
-  clearCart({commit}) {
+  clearCart({ commit }) {
     commit(CLEAR_CART)
   },
 
@@ -57,7 +58,15 @@ export default {
   // },
 
   // 同步记录用户信息
-  recordUser({commit}, userInfo) {
-    commit(RECEIVE_USER_INFO, {userInfo})
+  recordUser({ commit }, userInfo) {
+    console.log(userInfo)
+    commit(RECEIVE_USER_INFO, { userInfo })
   },
+
+  //更新商户地址
+  addlistShop({ commit }, addlist) {
+    commit(ADDLIST_SHOP, { addlist })
+  }
+
+  //加载商品列表
 }

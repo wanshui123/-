@@ -31,7 +31,7 @@ export default {
   },
   methods:{
     share(){
-      console.log(1)
+      // console.log(1)
       this.showShare = true
     }
   }

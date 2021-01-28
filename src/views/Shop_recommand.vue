@@ -6,103 +6,68 @@
       </router-link>
       <!-- <span>小龙虾必吃榜TOP6</span> -->
     </div>
-    <div class="shoping">
-      
+    <!-- 循环开始 -->
+
+    <div
+      v-for="(shop, index) of shop_recommand"
+      :key="index"
+      class="shoping"
+      @click="me(index)"
+    >
       <van-card
         class="van-vard"
-        num="1"
-        tag="top1"
-        price="29.9"
-        title="小龙虾烧烤"
-        desc="小龙虾+百威啤酒"
-        thumb="https://i.loli.net/2021/01/19/Lnt3dHg5P96kKjD.jpg">
-        
-        
-      
-        <template #footer>
-          <van-tag plain type="danger">销量：150</van-tag><br />
-          <van-tag plain type="danger">评分：</van-tag><br />
-          <van-rate v-model="value1" readonly />
-        </template>
-      </van-card>
-      <van-card
-        class="van-vard"
-        num="1"
-        tag="top2"
-        price="39.9"
-        title="蒜蓉小龙虾"
-        desc="25小龙虾，小分量大诱惑"
-        thumb="https://i.loli.net/2021/01/19/EabNXiu3Sloe6gH.jpg">
-        <template #footer>
-          <van-tag plain type="danger">销量：150</van-tag><br />
-          <van-tag plain type="danger">评分：</van-tag><br />
-          <van-rate v-model="value1" readonly />
-        </template>
-      </van-card>
-      <!-- 3 -->
-      <van-card
-        class="van-vard"
-        num="1"
-        tag="top3"
-        price="599.9"
-        title="单只澳洲进口龙虾"
-        desc="提前预定，高级定制"
-        thumb="https://i.loli.net/2021/01/19/Lnt3dHg5P96kKjD.jpg">
-        <template #footer>
-          <van-tag plain type="danger">销量：100</van-tag><br />
-          <van-tag plain type="danger">评分：</van-tag><br />
-          <van-rate v-model="value2" readonly />
-        </template>
-      </van-card>
-      <!-- 4 -->
-      <van-card
-        class="van-vard"
-        num="1"
-        tag="top4"
-        price="19.9"
-        title="秘制麻辣小龙虾"
-        desc="30只麻辣小龙虾，小分量大诱惑"
-        thumb="https://i.loli.net/2021/01/19/zYMhDEyPLIk15Uj.jpg">
-        <template #footer>
-          <van-tag plain type="danger">销量：150</van-tag><br />
-          <van-tag plain type="danger">评分：</van-tag><br />
-          <van-rate v-model="value2" readonly />
-        </template>
-      </van-card>
-      <!-- 5 -->
-      <van-card
-        class="van-vard"
-        num="1"
-        tag="top5"
-        price="29.9"
-        title="吮指全味虾球"
-        desc="大大的满足感油然而生"
-        thumb="https://i.loli.net/2021/01/19/c58723V6eSBiG94.jpg">
-        <template #footer>
-          <van-tag plain type="danger">销量：150</van-tag><br />
-          <van-tag plain type="danger">评分：</van-tag><br />
-          <van-rate v-model="value3" readonly />
-        </template>
-      </van-card>
-      <!-- 6 -->
-      <van-card
-        class="van-vard"
-        num="1"
-        tag="top6"
-        price="39.9" 
-        title="麻辣虾尾"
-        desc="30只麻辣小龙虾，小分量大诱惑"
-        thumb="https://i.loli.net/2021/01/19/q5jYyQae9krN2Du.jpg">
-        <template #footer>
-          <van-tag plain type="danger">销量：150</van-tag><br />
-          <van-tag plain type="danger">评分：</van-tag><br />
-          <van-rate v-model="value3" readonly />
+        :tag="shop.i_tag"
+        num=""
+        :price="shop.i_price.toFixed(2)"
+        :title="shop.i_subject"
+        :desc="shop.i_desc"
+        :thumb="shop.i_image"
+      >
+        <template #tags>
+          <van-tag>{{ shop.i_month }}</van-tag>
+          <van-tag>{{ shop.i_like }}</van-tag>
         </template>
       </van-card>
     </div>
   </div>
 </template>
-
+<script>
+export default {
+  data() {
+    return {
+      shop_recommand: {},
+      sos: "12",
+    };
+  },
+  methods: {
+    me(index) {
+      // this.$router.push({
+      //   path:`/details?${index}`})
+      // this.$router.push({
+      //   path:'/details',
+      //   name:'Details',
+      //   params:{id:index}
+      // })
+      console.log(index);
+      this.$router.push({
+        path: "/details",
+        name: "Details",
+        params: { id: index },
+      });
+    },
+  },
+  mounted() {
+    this.axios.get("/shop_recommand").then((res) => {
+      // console.log(res);
+      this.shop_recommand = res.data.data;
+      // console.log(res.data.data);
+      this.shop_recommand.forEach((item) => {
+        console.log(item);
+      });
+    });
+  },
+};
+</script>
 <style scoped>
 #container {
   background-color: #f6f6f6;
@@ -129,22 +94,9 @@
 }
 
 .van-card {
- margin-bottom: 2px;
+  margin-bottom: 2px;
   font-size: 16px;
-  border:2px solid #ccc;
+  border: 2px solid #ccc;
   border-radius: 5px;
 }
-
 </style>
-<script>
-export default {
-  data(){
-    return{
-      value1:5,
-      value2:4,
-      value3:4.5,
-      value4:4
-    }
-  }
-}
-</script>

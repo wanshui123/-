@@ -26,10 +26,10 @@
       <p>欢迎回来</p>
     </div>
     <van-grid>
-      <van-grid-item icon="orders-o" text="我的订单" />
+      <van-grid-item icon="orders-o" text="我的订单" to="/test" />
       <van-grid-item icon="share-o" text="分享" />
       <van-grid-item icon="chat-o" text="评论" />
-     <router-link to="/coupon1"><van-grid-item icon="coupon-o" text="优惠券" /></router-link> 
+     <router-link to="/coupon"><van-grid-item icon="coupon-o" text="优惠券" /></router-link> 
     </van-grid>
     <van-cell
       icon="label-o"
@@ -43,14 +43,14 @@
       is-link
       title="关于我们"
       link-type="navigateTo"
-      url="/pages/dashboard/index"
+      to="/aboutme"
     />
     <van-cell
       icon="diamond-o"
       is-link
       title="邀请有礼"
       link-type="navigateTo"
-      url="/pages/dashboard/index"
+      to="/inviting"
     />
 
     <van-cell
