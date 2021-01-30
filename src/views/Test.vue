@@ -31,13 +31,13 @@
   
   <div class="order-item">
     <div class="item-image">
-       <img :src="test.i_image">
+       <img src="">
     </div>
       <div class="order">
-        <div class=orders>{{test.i_subject}}</div>
-        <div class="desc">{{test.i_desc}}</div>
+        <div class=orders></div>
+        <div class="desc"></div>
         <!-- <div class="item">下单时间：2021-01-13 23:57</div> -->
-        <div class="item">价格：{{test.i_price}}</div>
+        <div class="item">价格：</div>
     </div>
     <!-- <div class="dan">
       订单完成
@@ -53,18 +53,18 @@ export default {
   data() {
     return {
       test:{},
-      i_id:0
+      i_id:""
     };
   },
   methods: {
   toleft(){
-    this.$router.push('/details')
+    this.$router.push('/me')
   }
   },
   mounted(){
     let i_id = this.$route.params.id
     console.log(i_id)
-    this.axios.post(`/shop_recommand,i_id=${i_id}`).then((res) => {
+    this.axios.post('/shop_recommand').then((res) => {
         this.test = res.data.data
         console.log(this.test);
     })

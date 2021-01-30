@@ -1,6 +1,7 @@
 <template>
   <div>
     <my-header></my-header>
+    <!-- 滚动提示语 -->
     <van-notice-bar
       left-icon="volume-o"
       :scrollable="true"

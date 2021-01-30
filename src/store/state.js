@@ -13,7 +13,7 @@ export default {
   //总价
   totalPrice: 0,
   //总数量
-  totalMount: 0,
+  totalCount: 0,
   goods: [
     {
       id: 2,

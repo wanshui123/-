@@ -8,7 +8,7 @@ import { Lazyload } from 'vant';
 //事件总线（eventbus）
 Vue.prototype.bus = bus;
 Vue.use(Lazyload);
-axios.defaults.baseURL = "http://172.88.16.9:3000"
+axios.defaults.baseURL = "http://127.0.0.1:3000"
 Vue.prototype.axios = axios;
 //初始化页面样式
 import './assets/styles/reset.css'

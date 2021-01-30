@@ -14,11 +14,12 @@
       class="shoping"
       @click="me(index)"
     >
+      <router-link :to="{path:'/details',query:{id: index+1}}">
       <van-card
         class="van-vard"
         :tag="shop.i_tag"
         num=""
-        :price="shop.i_price.toFixed(2)"
+        :price="(shop.i_price).toFixed(2)"
         :title="shop.i_subject"
         :desc="shop.i_desc"
         :thumb="shop.i_image"
@@ -28,6 +29,8 @@
           <van-tag>{{ shop.i_like }}</van-tag>
         </template>
       </van-card>
+      </router-link>
+      <!-- 循环结束 -->
     </div>
   </div>
 </template>
@@ -48,19 +51,22 @@ export default {
       //   name:'Details',
       //   params:{id:index}
       // })
+      //父子传参
       console.log(index);
-      this.$router.push({
-        path: "/details",
-        name: "Details",
-        params: { id: index },
-      });
+      // this.$router.push({
+      //   path: "/details",
+      //   name: "Details",
+      //   params: { id: index },
+      // });
     },
   },
   mounted() {
+       /*请求数据接口*/ 
     this.axios.get("/shop_recommand").then((res) => {
       // console.log(res);
       this.shop_recommand = res.data.data;
       // console.log(res.data.data);
+      /* 循环每一个数据*/ 
       this.shop_recommand.forEach((item) => {
         console.log(item);
       });
@@ -83,7 +89,7 @@ export default {
   border-radius: 0.2rem;
   color: #f00;
   font: bold 微软雅黑;
-  background-image: url(../assets/images/小龙虾必吃榜.png);
+  background-image: url(../assets/images/bichi.png);
   margin-bottom: 2px;
 }
 .iconstyle {

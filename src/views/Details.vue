@@ -1,102 +1,138 @@
 <template>
-  <div>
-    <van-nav-bar
-      left-text="菜品详情"
-      right-text="欢迎"
-      left-arrow
-    ></van-nav-bar>
+  <div class="header">
+    <!-- 导航栏 -->
+    <van-nav-bar title="商品详情">
+      <template #left>
+        <van-icon
+          name="arrow-left"
+          size="0.23rem"
+          color="white"
+          @click="toleft"
+        />
+      </template>
+      <template #right>
+        <van-icon name="like-o" color="white" size="0.23rem" />
+      </template>
+    </van-nav-bar>
+    <!-- 单个详情页 -->
     <div class="floor1">
-      <img src="../assets/2.jpg" style="width: 100%" alt="哦，加载失败了" />
+      <img
+        :src="details.img"
+        style="width: 100%; height: 100%"
+        alt="哦，加载失败了"
+      />
     </div>
     <div class="floor2">
-      <span>龙虾啤酒</span>
-      <van-stepper value="1" integer min="1" max="40"></van-stepper>
+      <span>{{ details.name }}</span>
+      <!-- <van-stepper value="1" integer min="1" max="10"></van-stepper> -->
     </div>
     <div class="floor3">
-        <span>商品详情</span>
-        <p>￥155.00</p>
+      <span>{{ details.i_desc }}</span>
+      <p>价格：{{ details.price }}</p>
     </div>
-    <div class="floor4">
-        <span>原料</span>
-        <p>菜品投料标准 香辣小龙虾 冻准投料 (克)2 操作程序 原材料名称 中虾/35只 中虾/20只 大中虾/3O只 大中虾/16只 大虾/20只 油70 </p>
-        <span>制作</span>
-         <p>清洁小龙虾，剪去虾头，抽出虾线。锅中放油，放入葱姜蒜爆香，放入一块火锅底料，炒出红油，放入五香粉、孜然粉、小茴香、甜面酱、生抽、耗油翻炒均匀，放入小龙虾翻炒，加入啤酒和水，盖盖子炖10分钟，开盖加入盐，鸡精，香菜。</p>
+    <!-- 订单跳转 -->
+    <div>
+      <van-button type="danger" size="large" @click="join()"
+        >加入订单</van-button
+      >
     </div>
-     <div>
-         <van-button type="danger" size="large">加入订单</van-button>
-     </div>
+
+    <!-- 购物车 -->
+    <cart-list></cart-list>
   </div>
 </template>
 <script>
+import CartList from "../components/Cartfoot";
 export default {
-    
-}
+  components: {
+    CartList,
+  },
+  data() {
+    return {
+      details: {},
+      i_id: 1,
+    };
+  },
+  methods: {
+    toleft() {
+      this.$router.push("/shop_recommand");
+    },
+    join() {
+      let isAdd = true;
+      this.$store.dispatch("updateFoodCount", { isAdd, food: this.details });
+    },
+  },
+  mounted() {
+    /**接受传来的数据 */
+    let i_id = this.$route.query.id;
+    // let i_id = Number(i_id)+1
+    console.log(typeof i_id, i_id);
+    if (i_id == 0) {
+      i_id = 0;
+    }
+    /** 请求数据接口*/
+
+    this.axios.post("/shop_recommand", `i_id=${i_id}`).then((res) => {
+      const {
+        i_id,
+        i_desc,
+        i_price: price,
+        i_image: img,
+        i_subject: name,
+      } = res.data.data;
+      this.details = { i_id, i_desc, price, img, name };
+    });
+  },
+  computed: {},
+};
 </script>
 <style scoped>
-.floor4{
-   margin-top:15px;
+.floor3 > p {
+  float: right;
+  margin-right: 0.15rem;
+  margin-top: 0.2rem;
+  color: firebrick;
+  font-size: 0.2rem;
+  margin-bottom: 0.15rem;
 }
-.floor4>span{
-    width: 100%;
-    height: 35px;
-    display: block;
-    margin-left:10px ;
-    font-weight: bold;
-    color: mediumspringgreen;
-    background-color:#f0f0f0;
-    border-left: 6px solid mediumspringgreen;
+.floor3 {
+  font-size: 0.2rem;
+  font-weight: bold;
+  margin-left: 15px;
+  margin-top: 0.2rem;
 }
-.floor4>p{
-    margin-top:15px ;
-    font-size: 20px;
-    margin-bottom:10px;
-    text-indent: 30px;
-    color: #aaa;
-    margin-left:5px ;
+.floor2 {
+  margin-top: 0.1rem;
+  font-size: 0.2rem;
+  margin: left 0.15rem;
+  margin-bottom: 0.1rem;
 }
-.floor3>p{
-    float: right;
-    margin-right:10px ;
-    margin-top:5px ;
-    color: firebrick;
+.floor2 > .van-stepper {
+  float: right;
+  margin-right: 10px;
 }
-.floor3{
-    font-size: 0.25rem;
-    font-weight: bold;
-     margin-left:15px;
-}
-.floor2{
-    margin-top:230px ;
-    font-size: 0.2rem;
-    margin-left:15px;
-    margin-bottom: 10px;
-}
-.floor2>.van-stepper{
-    float: right ;
-    margin-right:10px ;
-}
- .van-stepper>>>button{
+.van-stepper >>> button {
   width: 30px;
   height: 30px;
 }
-.van-stepper>>>.van-stepper__input{
-    font-size: 25px;
+.van-stepper >>> .van-stepper__input {
+  font-size: 25px;
 }
-   
 .floor1 {
-  height: 0.5rem;
+  width: 100%;
+  height: 2.5rem;
+  border: 1px solid red;
+  box-sizing: border-box;
 }
+
 .van-nav-bar {
-  background-color: #000;
+  background-color: #ff0303;
   border-bottom-left-radius: 0.05rem;
   border-bottom-right-radius: 0.05rem;
 }
-.van-nav-bar >>> .van-icon {
+
+.van-nav-bar >>> .van-nav-bar__title {
   color: white;
-  font-size: 0.2rem;
-}
-.van-nav-bar >>> .van-nav-bar__text {
-  color: white;
-  font-size: 0.18rem;
+  font-size: 0.15rem;
 }
 </style>

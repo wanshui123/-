@@ -1,7 +1,7 @@
 <template>
   <div>
+    <!-- 优惠券页 -->
     		<van-nav-bar style="background-color: red;">
-			
 			<template #left>
 				<van-icon @click="back" color="white" name="arrow-left" />
 			</template>

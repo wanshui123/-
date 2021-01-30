@@ -23,7 +23,6 @@
 		    placeholder="请输入昵称"
 		    :rules="[{ required: true, message: '请填写昵称' }]"
 		  />
-      <van-field
 		  <van-field
 		    v-model="username"
 		    name="账号"

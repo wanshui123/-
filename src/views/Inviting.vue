@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- 邀请页 -->
     <div class="clss">
       <van-nav-bar title="邀请有礼活动">
         <template #left>

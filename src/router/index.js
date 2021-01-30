@@ -99,7 +99,8 @@ const routes = [
   {
     path: '/details',
     name: 'Details',
-    component: Details
+    component: Details,
+    prop: true
   },
   {
     path: '/me',
@@ -116,7 +117,7 @@ const routes = [
 
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: 'hash',
   base: process.env.BASE_URL,
   routes
 })
@@ -127,7 +128,7 @@ VueRouter.prototype.push = function push(location, onResolve, onReject) {
 }
 router.beforeEach((to, from, next) => {
   console.log(to)
-  if (to.path == '/lists') {
+  if (to.path == '/lists' || to.path == '/details') {
     let isLogin = localStorage.getItem('isLogin')
     if (isLogin == 1) {
       next()

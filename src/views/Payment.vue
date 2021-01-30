@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- 支付订单页 -->
     <van-nav-bar title="付款" left-arrow  @click-left="onClickLeft"></van-nav-bar>
     <div>
       <div class="price">
